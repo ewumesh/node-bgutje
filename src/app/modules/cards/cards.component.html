@@ -1,0 +1,259 @@
+<div class="row">
+  <div cols="12" class="col-md-12 text-center">
+    <div
+      class="card"
+      tile
+      style="background-color:#272640; color: #fff;padding:5px 0; border-radius: 0;"
+    >
+      <h1>Cards</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <mat-accordion>
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Change Cards Details </mat-panel-title>
+        <mat-panel-description> Click here! </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form [formGroup]="cardsForm" (ngSubmit)="save()" autocomplete="off">
+        <div class="row">
+          <div class="col-md-3 px-2">
+            <mat-form-field appearance="outline">
+              <mat-label>University</mat-label>
+              <input
+                formControlName="universityName"
+                matInput
+                placeholder="Tribhuwan University"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 px-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Department</mat-label>
+              <input
+                formControlName="department"
+                matInput
+                placeholder="Central Library"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 px-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Address</mat-label>
+              <input
+                formControlName="address"
+                matInput
+                placeholder="Kathmandu"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 px-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                formControlName="email"
+                matInput
+                placeholder="abc@gmail.com"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 px-2">
+            <mat-form-field appearance="outline">
+              <mat-label>URL</mat-label>
+              <input formControlName="url" matInput placeholder="abc.com" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 px-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Phone No.</mat-label>
+              <input
+                formControlName="phoneNo"
+                matInput
+                placeholder="9812345678"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 px-2">
+            <mat-form-field appearance="outline">
+              <div>
+                <mat-toolbar>
+                  <input
+                    [value]="
+                      selectedSignature.length
+                        ? selectedSignature
+                        : 'Select Signature PNG Images'
+                    "
+                    matInput
+                  />
+
+                  <!-- <button class="btn btn-sm btn-secondary" [disabled]="!selectedFiles" (click)="upload()">
+                    Upload
+                  </button> -->
+                </mat-toolbar>
+
+                <input
+                  type="file"
+                  id="fileInput"
+                  name="fileInput"
+                  accept="image/*"
+                  multiple
+                  (change)="selectSignatureFiles($event)"
+                />
+              </div>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 px-2">
+            <mat-form-field appearance="outline">
+              <div>
+                <mat-toolbar>
+                  <input
+                    [value]="
+                      selectedFileNames.length
+                        ? selectedFileNames
+                        : 'Select Signature PNG Images'
+                    "
+                    matInput
+                  />
+                </mat-toolbar>
+
+                <input
+                  type="file"
+                  id="fileInput"
+                  name="fileInput"
+                  accept="image/*"
+                  multiple
+                  (change)="selectStampFiles($event)"
+                />
+              </div>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-12 text-center">
+            <button class="btn btn-primary btn-sm">Update</button>
+          </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<mat-tab-group>
+  <mat-tab label="Landscape">
+    <div class="row">
+      <div class="col-md-12 px-3">
+        <h4>Sample Card</h4>
+      </div>
+      <div
+        class="col-md-3 text-center px-2"
+        *ngFor="let data of userLists.slice(0, 4); let i = index"
+      >
+        <div
+          class="card text-center"
+          [id]="data.email"
+          style="height:54mm; width:86mm; border:1px solid #000;"
+        >
+          <div class="row" style="padding:3px 0">
+            <div
+              class="col-md-3 text-center"
+              style="padding-top:10px; padding-left:15px"
+            >
+              <img
+                height="70"
+                src="https://seeklogo.com/images/T/tribhuvan-university-tu-logo-AD67A28902-seeklogo.com.png"
+              />
+            </div>
+            <div
+              class="col-md-9"
+              style="color:#0096c7; margin: 0 !important;padding: 0 !important;line-height: 1.5;"
+            >
+              <div
+                style="font-weight:bold; font-size:12px; margin: 0; padding: 0;"
+              >
+                {{ universityName }}
+              </div>
+              <div style="font-size:10px">{{ department }}</div>
+              <div style="font-size:10px;">{{ address }}</div>
+              <div style="font-size:10px; color:#000;margin: 0;padding: 0;">
+                Email: {{ email }}, URL: {{ url }}
+              </div>
+              <div style="font-size:10px; color:#000">Phone no:{{ phone }}</div>
+            </div>
+
+            <div
+              class="col-md-12 text-center"
+              style="background-color:#023e8a; color:#fff; padding:2px 0; font-size:12px;"
+            >
+              <span style="text-transform:uppercase; letter-spacing: 3px;"
+                >PRIVATE</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="row"
+            style="text-align:left; padding:0 10px; font-size:10px;font-family: Arial, Helvetica, sans-serif;"
+          >
+            <!-- <barcode style=" height:20px; z-index:5555;" v-bind:value="barcodeValue">
+                Show this if the rendering fails.
+            </barcode> -->
+            <div class="col-md-10" style="line-height: 1.5;">
+              <div>Name: {{ data.firstname }} {{ data.surname }}</div>
+              <div>Address: {{ data.address }}</div>
+              <div>Email: {{ data.email }}</div>
+              <div>Department: IT</div>
+              <div>Phone: {{ data.phone }}</div>
+              <div>
+                Issued On: {{ data.date_enrolled }}
+                <div class="barcode">
+                  <!-- <barcode displayValue="false" style="margin: -28px 0 0 116px; !important;" height="15" width="1" v-bind:value="barcodeValue">
+                  Show this if the rendering fails.
+                </barcode> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <img height="65" src="../../../assets/pp.jpg" />
+              <img
+                *ngFor="let signature of signatureImagePath"
+                [src]="signature"
+                style="top: 151px;right: -8px;position: absolute;"
+                height="50"
+              />
+              <img
+                height="100"
+                style="top: 75px; right: 30px; position: absolute;"
+                *ngFor="let signature of stampImagePath"
+                [src]="signature"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <!-- <div class="col-md-12 text-center">
+            <button class="btn btn-primary btn-sm" (click)="individualDownload(data)">Download</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 px-2">
+        <button class="btn btn-primary btn-sm" (click)="individualDownload()">
+          Download All
+        </button>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Portrait"> Portrait </mat-tab>
+</mat-tab-group>
